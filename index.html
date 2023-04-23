@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
@@ -13,39 +13,111 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
-    
-</head>
-<body>
-    <section class="screen h-[100vh] w-[100%]">
-        <div class="main ">
-            <h1>I am thinking of a number between 1-50. <br>Can you guess it</h1>
-            <input class="display" type="number" name="" id="input" min="1" max="2">
-            <button id="btn" >GUESS</button>
-            <p id="won">
-                results are <br>
-            </p>
+  </head>
+  <body>
+    <section class="level screen h-[100vh] w-[100%]" id="level">
+      <div class="ask_level">
+        <h1 id="entry">CHOOSE THE DIFFICULTY LEVEL</h1>
+        <div class="buttons">
+          <button class="difficulty" onclick="easy_level()">EASY</button>
+          <button class="difficulty" onclick="medium_level()">MEDIUM</button>
+          <button class="difficulty" onclick="hard_level()">HARD</button>
         </div>
+      </div>
     </section>
-</body>
-<script>
+    <section class="game h-[100vh] w-[100%]" id="game">
+      <div class="main">
+        <h1>I am thinking of a number between 1-50. <br />Can you guess it</h1>
+        <input
+          class="display"
+          type="number"
+          name=""
+          id="input"
+          min="1"
+          max="2"
+        />
+        <button id="btn">GUESS</button>
+        <p id="won"></p>
+        <button id="btn1">REPLAY</button>
+      </div>
+    </section>
+  </body>
+  <script>
     var ans = Math.floor(Math.random() * 50) + 1;
-    console.log(ans)
-    let guess=0;
-    let inputs =document.getElementById("input")
-    document.getElementById("btn").addEventListener("click", () =>{
-        console.log(inputs.value);
-        guess=guess+1;
-        let num_val=inputs.value;
-        if(num_val==ans){
-            document.getElementById("won").innerHTML = `Yahhhh You won it!!<br>the number was ${ans}  <br>Your guessed it in ${guess} guesses`;
+    console.log(ans);
+    let guess = 0;
+    let inputs = document.getElementById("input");
+    let level = 0;
+    function easy_level() {
+      level = 10;
+      document.getElementById("game").style.display = "flex";
+      document.getElementById("level").style.display = "none";
+    }
+    function medium_level() {
+      level = 6;
+      document.getElementById("game").style.display = "flex";
+      document.getElementById("level").style.display = "none";
+    }
+    function hard_level() {
+      level = 3;
+      document.getElementById("game").style.display = "flex";
+      document.getElementById("level").style.display = "none";
+    }
+
+    document.getElementById("btn").addEventListener("click", () => {
+      console.log(inputs.value);
+      guess = guess + 1;
+      let num_val = inputs.value;
+
+      if (num_val == ans) {
+        document.getElementById(
+          "won"
+        ).innerHTML = `Yahhhh You won it!!<br>the number was ${ans}  <br>Your guessed it in ${guess} guesses`;
+        document.getElementById("btn1").style.display = "block";
+      } else if (guess <= level) {
+        if (num_val > ans) {
+          if ((num_val - ans) < 5) {
+            document.getElementById("won").innerHTML = `Ooopps it was not the answer <br>This is your  ${guess} guess <br>you have ${level - guess} left <br> Your guess was slightly high`;
+          } else {
+            document.getElementById("won").innerHTML = `Ooopps it was not the answer <br>This is your  ${guess} guess <br>you have ${level - guess} left <br> Your guess was  high`;
+          }
+        } else {
+          if ((ans - num_val) < 5) {
+            document.getElementById("won").innerHTML = `Ooopps it was not the answer <br>This is your  ${guess} guess <br>you have ${level - guess} left <br> Your guess was slightly less`;
+          } else {
+            document.getElementById("won").innerHTML = `Ooopps it was not the answer <br>This is your  ${guess} guess <br>you have ${level - guess} left <br> Your guess was  less`;
+          }
         }
-        else{
-            document.getElementById("won").innerHTML = 'Ooopss :(  <br> Wrong guess <br> better luck next time';
-        }
-    })
-</script>
+
+        
+      } else {
+        document.getElementById("won").innerHTML =
+          "Ooopss :(  <br> Wrong guess <br> better luck next time";
+        document.getElementById("btn1").style.display = "block";
+      }
+    });
+
+    document.getElementById("btn1").addEventListener("click", () => {
+      num_val = "";
+      guess=0
+      document.getElementById("btn1").style.display = "none";
+      document.getElementById("won").innerHTML = "";
+      var ans = Math.floor(Math.random() * 50) + 1;
+      inputs.value = "";
+    });
+
+    inputs.addEventListener("keyup", function (event) {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("btn").click();
+      }
+    });
+  </script>
 </html>

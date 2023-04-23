@@ -4,16 +4,36 @@
     box-sizing: border-box;
 }
 
-.screen{
+.game{
     background: #9D50BB;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to right, #6E48AA, #9D50BB);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to right, #6E48AA, #9D50BB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 display: flex;
 justify-content: center;
     align-items: center;
+    display: none;
 
 
 }
+.level{
+    background: #9D50BB;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #6E48AA, #9D50BB);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #6E48AA, #9D50BB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+display: flex;
+justify-content: center;
+    align-items: center;}
+
+.ask_level{
+        height: 70%;
+        width: 60%;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+    justify-content: center;
+        align-items: center;
+        box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+    }
 .main{
     /*h-[70vmin] w-[50vmin] flex justify-center items-center bg-white*/
     height: 70%;
@@ -36,6 +56,7 @@ button{
     opacity: 0.9;
     margin-top: 20px;
 }
+
 h1{
     font-size: 5vmin;
     font-weight: 700;
@@ -71,3 +92,18 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
   }
+  #btn1{
+    display: none;
+}
+#entry{
+    font-size: 7vmin;
+    border-bottom: 30px;
+}
+.buttons{
+    height: 20%;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border: none;
+}
