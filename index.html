@@ -34,7 +34,7 @@
     </section>
     <section class="game h-[100vh] w-[100%]" id="game">
       <div class="main">
-        <h1>I am thinking of a number between 1-50. <br />Can you guess it</h1>
+        <h1>I am thinking of a number between <span id="range"></span> <br />Can you guess it</h1>
         <input
           class="display"
           type="number"
@@ -50,25 +50,30 @@
     </section>
   </body>
   <script>
-    var ans = Math.floor(Math.random() * 50) + 1;
-    console.log(ans);
+    
     let guess = 0;
     let inputs = document.getElementById("input");
     let level = 0;
     function easy_level() {
       level = 10;
+      var ans = Math.floor(Math.random() * 50) + 1;
       document.getElementById("game").style.display = "flex";
       document.getElementById("level").style.display = "none";
+      document.getElementById("range").innerHTML =`1-50`;
     }
     function medium_level() {
       level = 6;
+      var ans = Math.floor(Math.random() * 100) + 1;
       document.getElementById("game").style.display = "flex";
       document.getElementById("level").style.display = "none";
+      document.getElementById("range").innerHTML =`1-100`;
     }
     function hard_level() {
       level = 3;
+      var ans = Math.floor(Math.random() * 1000) + 1;
       document.getElementById("game").style.display = "flex";
       document.getElementById("level").style.display = "none";
+      document.getElementById("range").innerHTML =`1-1000`;
     }
 
     document.getElementById("btn").addEventListener("click", () => {
